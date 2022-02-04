@@ -1,6 +1,11 @@
 #!/bin/bash 
 i=0
+FLOOR=1
+gener=0   # инициализация
+while [ $gener -le $FLOOR ]
+do
 gener=$RANDOM
+done 
 RANGE=100
 let "gener %= $RANGE"
 while [ $i -le 2 ]
