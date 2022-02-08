@@ -1,24 +1,31 @@
-#!/bin/bash 
-i=0
-FLOOR=1
-gener=0   # инициализация
-while [ $gener -le $FLOOR ]
-do
-gener=$RANDOM
-done 
-RANGE=100
-let "gener %= $RANGE"
-while [ $i -le 2 ]
-do
-i=$(( $i + 1 ))
-echo Enter number:
-read num 
-if [ $num -eq $gener ]
-then
-echo Yes!
-break
-else
-echo No!
-fi
-done
+#!/bin/bash
+
+#script.sh - скрипт, представляющий из себя игру по 
+#угадыванию сгенерированного числа. У пользователя есть 3
+#попытки, что-бы угадать число, иначе проигрыш.
+
+i=0       # иницианилизация переменной для цикла
+gener=0   # иницианилизация переменной для случайного числа 
+FLOOR=1   # нижнее пороговое значение для случайного числа
+RANGE=100 # верхнее пороговое значение для случайного числа
+while [ $gener -le $FLOOR ] # цикл генерации случайного числа > чем FLOOR
+    do
+    gener=$RANDOM    
+    done 
+let "gener %= $RANGE"    # ограничение вернего порога генерируемого значения
+while [ $i -le 2 ]       # цикл угадывания сгенерированного значения
+    do
+    i=$(( $i + 1 ))
+    echo Enter number:
+    read num 
+    if [ $num -gt $gener ]
+        then
+        echo The number is greater than the mystery number
+    elif [ $num -lt $gener ]
+        then
+        echo The number is less than the mystery number
+    else #загаданное число равно введённому
+        echo Yes! 
+    fi
+    done
 echo Game over. $gener
